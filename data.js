@@ -37,7 +37,7 @@ const replyCourses = (event) => {
     return bubble
   })
   console.log('hello here' + typeof (bubbles))
-  console.log(JSON.stringify(bubbles, null, 2))
+  // console.log(JSON.stringify(bubbles, null, 2))
   fs.writeFileSync('bubbles.json', JSON.stringify(bubbles, null, 2))
   event.reply([
     {
