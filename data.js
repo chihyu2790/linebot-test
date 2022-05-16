@@ -5,6 +5,7 @@ import fs from 'fs'
 
 const courses = []
 
+// 串一張圖
 const fetchData = async () => {
   try {
     const { data } = await axios.get('https://wdaweb.github.io/')
@@ -35,10 +36,10 @@ const replyCourses = (event) => {
   event.reply([
     {
       type: 'flex',
-      altText: '共通課程',
+      altText: 'CAT',
       contents: {
         type: 'carousel',
-        contents: bubbles.slice(0, 6)
+        contents: bubbles.slice(0, 1)
       }
     }
   ])
