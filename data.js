@@ -17,6 +17,7 @@ const fetchData = async () => {
     const $ = cheerio.load(data)
     // 片歷內容
     for (let i; i < data.length; i++) {
+      console.log(courses[i])
       courses[i] = data[i]
     }
     // $('#general .col-md-3').each(function () {
