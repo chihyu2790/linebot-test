@@ -61,7 +61,35 @@ const replyCourses = (event) => {
       altText: '訊息來了',
       contents: {
         type: 'carousel',
-        contents: bubbles.slice(0, 3)
+        contents: bubbles.slice(0, 6)
+      }
+    }, {
+      type: 'flex',
+      altText: '訊息來了',
+      contents: {
+        type: 'carousel',
+        contents: bubbles.slice(0, 6)
+      }
+    }, {
+      type: 'flex',
+      altText: '訊息來了',
+      contents: {
+        type: 'carousel',
+        contents: bubbles.slice(0, 6)
+      }
+    }, {
+      type: 'flex',
+      altText: '訊息來了',
+      contents: {
+        type: 'carousel',
+        contents: bubbles.slice(0, 6)
+      }
+    }, {
+      type: 'flex',
+      altText: '訊息來了',
+      contents: {
+        type: 'carousel',
+        contents: bubbles.slice(0, 6)
       }
     }
   ])
