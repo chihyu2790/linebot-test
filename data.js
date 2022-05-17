@@ -29,20 +29,28 @@ const fetchData = async () => {
 }
 // 傳入event物件
 const replyCourses = (event) => {
+  // bubbles是運算整個courses陣列的每個值後產生新的陣列
+  // course是參數值
   const bubbles = courses.map(course => {
+    // bubble把模板轉成json
     const bubble = JSON.parse(JSON.stringify(template))
+    // 模板的圖片區改成網頁圖
     bubble.hero.url = course[0]
+    // 模板的body的content陣列第一位的text改成抓到的標題
     bubble.body.contents[0].text = course[1]
+    // 模板的body的content陣列第二位的text改成抓到的標題
     bubble.body.contents[1].text = course[2]
+    // 回傳給bubbles
     return bubble
   })
-  console.log('hello here' + typeof (bubbles))
-  // console.log(JSON.stringify(bubbles, null, 2))
+  // 物件
+  console.log('hello here>>>>>' + typeof (bubbles))
+  console.log('hello heeeeeee>>>>>' + JSON.stringify(bubbles, null, 2))
   fs.writeFileSync('bubbles.json', JSON.stringify(bubbles, null, 2))
   event.reply([
     {
       type: 'flex',
-      altText: 'CAT',
+      altText: '訊息來了',
       contents: {
         type: 'carousel',
         contents: bubbles.slice(0, 1)
