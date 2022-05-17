@@ -1,5 +1,5 @@
 import axios from 'axios'
-import cheerio from 'cheerio'
+// import cheerio from 'cheerio'
 import template from './template.js'
 import fs from 'fs'
 
@@ -14,7 +14,7 @@ const fetchData = async () => {
     const { data } = await axios.get('https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top=1000&$skip=0')
 
     // 可用jq語法去解析html
-    const $ = cheerio.load(data)
+    // const $ = cheerio.load(data)
     // 片歷內容
     for (const i of data) {
       courses.push(i)
@@ -57,34 +57,6 @@ const replyCourses = (event) => {
   fs.writeFileSync('bubbles.json', JSON.stringify(bubbles, null, 2))
   event.reply([
     {
-      type: 'flex',
-      altText: '訊息來了',
-      contents: {
-        type: 'carousel',
-        contents: bubbles.slice(0, 6)
-      }
-    }, {
-      type: 'flex',
-      altText: '訊息來了',
-      contents: {
-        type: 'carousel',
-        contents: bubbles.slice(0, 6)
-      }
-    }, {
-      type: 'flex',
-      altText: '訊息來了',
-      contents: {
-        type: 'carousel',
-        contents: bubbles.slice(0, 6)
-      }
-    }, {
-      type: 'flex',
-      altText: '訊息來了',
-      contents: {
-        type: 'carousel',
-        contents: bubbles.slice(0, 6)
-      }
-    }, {
       type: 'flex',
       altText: '訊息來了',
       contents: {
