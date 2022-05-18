@@ -28,5 +28,5 @@ bot.on('message', (event) => {
 })
 
 bot.listen('/', process.env.PORT || 3000, () => {
-  console.log('貓狗機器人啟動...逼..逼逼')
+  console.log('貓狗機器人啟動...逼逼..逼逼')
 })
