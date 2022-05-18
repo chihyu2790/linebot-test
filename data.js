@@ -45,9 +45,9 @@ const replyCourses = (event) => {
     // 模板的圖片區改成網頁圖
     bubble.hero.url = course.album_file
     // 模板的body的content陣列第一位的text改成抓到的標題
-    // bubble.body.contents[1].contents[1].text = course.animal_kind
+    bubble.body.contents[0].text = course.animal_kind
     // 模板的body的content陣列第二位的text改成抓到的標題
-    // bubble.body.contents[1].text = course.animal_colour
+    bubble.body.contents[1].text = course.animal_colour
     // 回傳給bubbles
     return bubble
   })
