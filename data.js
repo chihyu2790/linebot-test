@@ -11,7 +11,7 @@ const fetchData = async () => {
     // 用axios取出，並使用data的部分
     // data陣列
     // const { data } = await axios.get('https://wdaweb.github.io/')
-    const { data } = await axios.get('https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top=1000&$skip=0')
+    const { data } = await axios.get('https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL')
 
     // 可用jq語法去解析html
     // const $ = cheerio.load(data)
