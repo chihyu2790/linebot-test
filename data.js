@@ -1,60 +1,55 @@
 import axios from 'axios'
-// import cheerio from 'cheerio'
+
 import template from './template.js'
 import fs from 'fs'
 
 const courses = []
 
-// 串一張圖
 const fetchData = async () => {
   try {
-    // 用axios取出，並使用data的部分
-    // data陣列
-    // const { data } = await axios.get('https://wdaweb.github.io/')
     const { data } = await axios.get('https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&$top=1000&$skip=0')
 
-    // 可用jq語法去解析html
-    // const $ = cheerio.load(data)
-    // 片歷內容
     for (const i of data) {
       courses.push(i)
     }
-    // $('#general .col-md-3').each(function () {
-    //   // 推送到陣列裡
-    //   courses.push(
-    //     [
-    //       // 圖片文字處理
-    //       'https://wdaweb.github.io/' + $(this).find('img').attr('src').slice(2),
-    //       ...$(this).text().replace(/\t/g, '').split('\n').filter(text => text.length > 0)
-    //     ]
-    //   )
-    // })
   } catch (error) {
     console.log(error)
   }
 }
-// 傳入event物件
+
 const replyCourses = (event) => {
-  // const idx = data.findIndex(item => item.Name === event.message.text)
-  // course陣列有0:圖片、1:文字
-  // bubbles是運算整個courses陣列的每個值後產生新的陣列
-  // course是參數值
   const bubbles = courses.map(course => {
-    // bubble把模板轉成json
     const bubble = JSON.parse(JSON.stringify(template))
-    // 模板的圖片區改成網頁圖
-    bubble.hero.url = course.album_file
-    // 模板的body的content陣列第一位的text改成抓到的標題
-    bubble.body.contents[0].text = course.animal_kind
-    // 模板的body的content陣列第二位的text改成抓到的標題
-    bubble.body.contents[1].text = course.animal_colour
-    // 回傳給bubbles
+
+    if (course.album_file !== '') {
+      bubble.hero.url = course.album_file
+      bubble.hero.action.uri = course.album_file
+    } else {
+      bubble.hero.url = 'https://raw.githubusercontent.com/chihyu2790/practice/main/img/lineBot/3733459.jpg'
+    }
+
+    bubble.body.contents[0].contents[0].contents[1].text = course.animal_kind
+    bubble.body.contents[0].contents[1].contents[1].text = course.animal_Variety
+    bubble.body.contents[0].contents[2].contents[1].text = course.animal_colour
+    bubble.body.contents[0].contents[3].contents[1].text = course.animal_bodytype
+    bubble.body.contents[0].contents[4].contents[1].text = course.animal_sex
+    bubble.body.contents[0].contents[5].contents[1].text = course.animal_foundplace
+    bubble.body.contents[0].contents[6].contents[1].text = course.shelter_name
+    bubble.body.contents[0].contents[7].contents[1].text = course.shelter_address
+    bubble.body.contents[0].contents[8].contents[1].text = course.shelter_tel
+    bubble.body.contents[0].contents[9].contents[1].text = course.animal_subid
+    bubble.body.contents[0].contents[10].contents[1].text = course.animal_status
+
+    if (course.animal_remark !== '') {
+      bubble.body.contents[0].contents[11].contents[1].text = course.animal_remark
+    } else {
+      bubble.body.contents[0].contents[11].contents[1].text = '沒有備註'
+    }
+    bubble.body.contents[0].contents[12].contents[1].text = course.cDate
+
     return bubble
   })
-  // 物件
-  console.log('hello here>>>>>' + typeof (bubbles))
-  console.log('hello heeeeeee>>>>>' + JSON.stringify(bubbles[0], null, 2))
-  console.log('hello heeeeeee>>>>>' + JSON.stringify(bubbles[1], null, 2))
+
   fs.writeFileSync('bubbles.json', JSON.stringify(bubbles, null, 2))
   event.reply([
     {

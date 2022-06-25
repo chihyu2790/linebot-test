@@ -17,16 +17,17 @@ const bot = linebot({
 
 bot.on('message', (event) => {
   if (data.courses.length === 0) {
-    console.log(data.courses)
     event.reply('資料讀取中，請稍後再試')
   } else if (event.message.type === 'text') {
     // 使用者輸入回復不同內容
-    if (event.message.text === '共通課程') {
+
+    if (event.message.text === '我想領養') {
+      console.log('hi')
       data.replyCourses(event)
     }
   }
 })
 
 bot.listen('/', process.env.PORT || 3000, () => {
-  console.log('貓狗機器人啟動...逼逼..逼逼')
+  console.log('貓狗機器人啟動...咕咕咕..汪汪汪')
 })
